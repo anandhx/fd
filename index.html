@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Menu</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-size: 16px;
+        }
+
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #f8f9fa;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-nav {
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .navbar-nav .nav-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .category-menu {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .sub-category-menu {
+            margin-top: 10px;
+            display: none;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .sub-category-menu.active {
+            display: flex;
+        }
+
+        .category-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .category-section.active {
+            display: block;
+        }
+
+        .product-card {
+            display: none;
+        }
+
+        .product-card.active {
+            display: block;
+        }
+
+        .product-card img {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card img:hover {
+            transform: scale(1.1);
+        }
+
+        .sos-button {
+            position: fixed;
+            bottom: 70px;
+            right: 10px;
+            z-index: 1000;
+        }
+
+        .modal-img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Category Filters -->
+    <div class="category-menu">
+        <button class="btn btn-primary" onclick="filterCategory('all')">All</button>
+        <button class="btn btn-primary" onclick="filterCategory('drink')">Drinks</button>
+        <button class="btn btn-primary" onclick="filterCategory('curry')">Curries</button>
+        <button class="btn btn-primary" onclick="filterCategory('oily')">Oily</button>
+        <button class="btn btn-primary" onclick="filterCategory('fry')">Fry</button>
+    </div>
+
+    <!-- Subcategory Filters -->
+    <div id="subCategoryMenu" class="sub-category-menu">
+        <button class="btn btn-secondary" onclick="filterSubCategory('all')">All Curries</button>
+        <button class="btn btn-secondary" onclick="filterSubCategory('veg')">Veg</button>
+        <button class="btn btn-secondary" onclick="filterSubCategory('nonveg')">Non-Veg</button>
+    </div>
+
+    <!-- Menu Items -->
+    <div id="menuItems" class="row">
+        <div class="col-6 col-sm-4 mb-4 product-card drink active">
+            <div class="card">
+                <img src="https://via.placeholder.com/300x150" alt="Drink 1" class="card-img-top" onclick="openModal(this)">
+                <div class="card-body">
+                    <h5 class="card-title">Drink 1</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-sm-4 mb-4 product-card curry veg active">
+            <div class="card">
+                <img src="https://via.placeholder.com/300x150" alt="Veg Curry" class="card-img-top" onclick="openModal(this)">
+                <div class="card-body">
+                    <h5 class="card-title">Veg Curry</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-sm-4 mb-4 product-card curry nonveg active">
+            <div class="card">
+                <img src="https://via.placeholder.com/300x150" alt="Non-Veg Curry" class="card-img-top" onclick="openModal(this)">
+                <div class="card-body">
+                    <h5 class="card-title">Non-Veg Curry</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-sm-4 mb-4 product-card oily active">
+            <div class="card">
+                <img src="https://via.placeholder.com/300x150" alt="Oily Food" class="card-img-top" onclick="openModal(this)">
+                <div class="card-body">
+                    <h5 class="card-title">Oily Food</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sticky Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('menu')">Menu</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('today-special')">Today Special</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('offers')">Offers</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Image Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Product Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" class="modal-img" src="" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SOS Button -->
+<button class="btn btn-danger sos-button">SOS - Call Staff</button>
+
+<script>
+    // Filter by Category
+    function filterCategory(category) {
+        const items = document.querySelectorAll('.product-card');
+        const subCategoryMenu = document.getElementById('subCategoryMenu');
+
+        // Show subcategories for "Curry"
+        if (category === 'curry') {
+            subCategoryMenu.classList.add('active');
+        } else {
+            subCategoryMenu.classList.remove('active');
+        }
+
+        items.forEach(item => {
+            item.classList.remove('active');
+            if (category === 'all' || item.classList.contains(category)) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    // Filter by Subcategory
+    function filterSubCategory(subCategory) {
+        const items = document.querySelectorAll('.product-card.curry');
+
+        items.forEach(item => {
+            item.classList.remove('active');
+            if (subCategory === 'all' || item.classList.contains(subCategory)) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    // Section Switcher
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.category-section');
+        sections.forEach(section => section.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    // Open Modal with Image
+    function openModal(image) {
+        const modalImage = document.getElementById('modalImage');
+        modalImage.src = image.src;
+        $('#imageModal').modal('show');
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
