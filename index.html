@@ -74,6 +74,11 @@
             transform: scale(1.1);
         }
 
+        .carousel-item img {
+            width: 100%;
+            height: auto;
+        }
+
         .sos-button {
             position: fixed;
             bottom: 70px;
@@ -106,33 +111,80 @@
 
     <!-- Menu Items -->
     <div id="menuItems" class="row">
+        <!-- Product 1: Drink -->
         <div class="col-6 col-sm-4 mb-4 product-card drink active">
             <div class="card">
-                <img src="https://via.placeholder.com/300x150" alt="Drink 1" class="card-img-top" onclick="openModal(this)">
+                <div id="carouselExampleDrink1" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://via.placeholder.com/300x150?text=Drink+1+Image+1" alt="Drink 1 Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://via.placeholder.com/300x150?text=Drink+1+Image+2" alt="Drink 1 Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">Drink 1</h5>
                 </div>
             </div>
         </div>
+
+        <!-- Product 2: Veg Curry -->
         <div class="col-6 col-sm-4 mb-4 product-card curry veg active">
             <div class="card">
-                <img src="https://via.placeholder.com/300x150" alt="Veg Curry" class="card-img-top" onclick="openModal(this)">
+                <div id="carouselExampleCurryVeg" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://via.placeholder.com/300x150?text=Veg+Curry+Image+1" alt="Veg Curry Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://via.placeholder.com/300x150?text=Veg+Curry+Image+2" alt="Veg Curry Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                 
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">Veg Curry</h5>
                 </div>
             </div>
         </div>
+
+        <!-- Product 3: Non-Veg Curry -->
         <div class="col-6 col-sm-4 mb-4 product-card curry nonveg active">
             <div class="card">
-                <img src="https://via.placeholder.com/300x150" alt="Non-Veg Curry" class="card-img-top" onclick="openModal(this)">
+                <div id="carouselExampleCurryNonVeg" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://via.placeholder.com/300x150?text=Non-Veg+Curry+Image+1" alt="Non-Veg Curry Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://via.placeholder.com/300x150?text=Non-Veg+Curry+Image+2" alt="Non-Veg Curry Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                 
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">Non-Veg Curry</h5>
                 </div>
             </div>
         </div>
+
+        <!-- Product 4: Oily Food -->
         <div class="col-6 col-sm-4 mb-4 product-card oily active">
             <div class="card">
-                <img src="https://via.placeholder.com/300x150" alt="Oily Food" class="card-img-top" onclick="openModal(this)">
+                <div id="carouselExampleOilyFood" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://via.placeholder.com/300x150?text=Oily+Food+Image+1" alt="Oily Food Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://via.placeholder.com/300x150?text=Oily+Food+Image+2" alt="Oily Food Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                  
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">Oily Food</h5>
                 </div>
@@ -140,6 +192,11 @@
         </div>
     </div>
 </div>
+
+
+
+
+
 
 <!-- Sticky Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
@@ -156,6 +213,31 @@
     </ul>
 </nav>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Image Modal -->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -167,7 +249,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img id="modalImage" class="modal-img" src="" alt="">
+                <img id="modalImage" class="modal-img" src="" alt="Product Image">
             </div>
         </div>
     </div>
@@ -209,12 +291,13 @@
         });
     }
 
-    // Section Switcher
-    function showSection(sectionId) {
+        // Section Switcher
+        function showSection(sectionId) {
         const sections = document.querySelectorAll('.category-section');
         sections.forEach(section => section.classList.remove('active'));
         document.getElementById(sectionId).classList.add('active');
     }
+
 
     // Open Modal with Image
     function openModal(image) {
@@ -229,3 +312,4 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
