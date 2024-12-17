@@ -1,0 +1,13 @@
+/* Custom Bootstrap overrides */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    color: #343a40;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
