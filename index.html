@@ -7,17 +7,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            font-size: 16px;
-        }
+    font-size: 16px;
+    margin-bottom: 80px; /* Ensures content is not hidden under navbar */
+}
 
-        .navbar {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            z-index: 1000;
-            background-color: #f8f9fa;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-        }
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -3px;
+    margin-left: -20px;
+}
+
+.product-container {
+    padding-bottom: 80px; /* Add padding equal to navbar height */
+}
+
+.navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #f8f9fa;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
 
         .navbar-nav {
             flex-direction: row;
@@ -36,14 +48,13 @@
             justify-content: center;
             gap: 10px;
         }
-
         .sub-category-menu {
-            margin-top: 10px;
-            display: none;
-            justify-content: center;
-            gap: 10px;
-        }
-
+    margin-top: 21px;
+    display: none;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
         .sub-category-menu.active {
             display: flex;
         }
@@ -61,14 +72,30 @@
             display: none;
         }
 
+        .product-card .card {
+    width: 111%;
+    max-width: 218px;
+    height: 178px;
+    margin: -1px auto;
+    display: flex
+;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card .card img {
+    width: 100%;
+    height: 118px;
+    object-fit: cover;
+}
+
+
+
         .product-card.active {
             display: block;
         }
 
-        .product-card img {
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
+
 
         .product-card img:hover {
             transform: scale(1.1);
@@ -89,6 +116,62 @@
         .modal-img {
             width: 100%;
         }
+
+      /* General Card Styling */
+      .card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.image-container img {
+    width: 100%;
+    height: 150px; /* Fixed height for images */
+    object-fit: cover;
+}
+
+/* Card Body Layout */
+.custom-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    height: 100px; /* Fixed card body height */
+}
+
+/* Food Name and Price Layout */
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping for long names */
+}
+
+.food-name {
+    flex: 1; /* Food name takes up available space */
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 5px;
+}
+
+.price-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px; /* Space between price and checkbox */
+}
+
+.food-price {
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.custom-checkbox {
+    transform: scale(1.1);
+}
+
     </style>
 </head>
 <body>
@@ -113,21 +196,83 @@
     <div id="menuItems" class="row">
         <!-- Product 1: Drink -->
         <div class="col-6 col-sm-4 mb-4 product-card drink active">
+    <div class="card">
+        <div id="carouselExampleDrink1" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="../assets/images/thai.png" alt="Drink 1 Image 1" onclick="openModal(this)">
+                </div>
+                <div class="carousel-item">
+                    <img src="../assets/images/cocunut.png" alt="Drink 1 Image 2" onclick="openModal(this)">
+                </div>
+            </div>
+        </div>
+        <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Name</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Product 2: Veg Curry -->
+        <div class="col-6 col-sm-4 mb-4 product-card curry veg active">
+            <div class="card">
+                <div id="carouselExampleCurryVeg" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../assets/images/eggcurry.png" alt="Veg Curry Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/images/chicken.png" alt="Veg Curry Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                 
+                </div>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example </div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Product 1: Drink -->
+        <div class="col-6 col-sm-4 mb-4 product-card drink active">
             <div class="card">
                 <div id="carouselExampleDrink1" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://via.placeholder.com/300x150?text=Drink+1+Image+1" alt="Drink 1 Image 1" onclick="openModal(this)">
+                            <img src="../assets/images/thai.png" alt="Drink 1 Image 1" onclick="openModal(this)">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://via.placeholder.com/300x150?text=Drink+1+Image+2" alt="Drink 1 Image 2" onclick="openModal(this)">
+                            <img src="../assets/images/cocunut.png" alt="Drink 1 Image 2" onclick="openModal(this)">
                         </div>
                     </div>
                 
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Drink 1</h5>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
                 </div>
+            </div>
+        </div>
             </div>
         </div>
 
@@ -137,19 +282,233 @@
                 <div id="carouselExampleCurryVeg" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://via.placeholder.com/300x150?text=Veg+Curry+Image+1" alt="Veg Curry Image 1" onclick="openModal(this)">
+                            <img src="../assets/images/eggcurry.png" alt="Veg Curry Image 1" onclick="openModal(this)">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://via.placeholder.com/300x150?text=Veg+Curry+Image+2" alt="Veg Curry Image 2" onclick="openModal(this)">
+                            <img src="../assets/images/chicken.png" alt="Veg Curry Image 2" onclick="openModal(this)">
                         </div>
                     </div>
                  
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Veg Curry</h5>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
                 </div>
             </div>
         </div>
+            </div>
+        </div>
+
+
+
+        <!-- Product 1: Drink -->
+        <div class="col-6 col-sm-4 mb-4 product-card drink active">
+            <div class="card">
+                <div id="carouselExampleDrink1" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../assets/images/thai.png" alt="Drink 1 Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/images/cocunut.png" alt="Drink 1 Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <!-- Product 2: Veg Curry -->
+        <div class="col-6 col-sm-4 mb-4 product-card curry veg active">
+            <div class="card">
+                <div id="carouselExampleCurryVeg" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../assets/images/eggcurry.png" alt="Veg Curry Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/images/chicken.png" alt="Veg Curry Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                 
+                </div>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+        <!-- Product 1: Drink -->
+        <div class="col-6 col-sm-4 mb-4 product-card drink active">
+            <div class="card">
+                <div id="carouselExampleDrink1" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../assets/images/thai.png" alt="Drink 1 Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/images/cocunut.png" alt="Drink 1 Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <!-- Product 2: Veg Curry -->
+        <div class="col-6 col-sm-4 mb-4 product-card curry veg active">
+            <div class="card">
+                <div id="carouselExampleCurryVeg" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../assets/images/eggcurry.png" alt="Veg Curry Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/images/chicken.png" alt="Veg Curry Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                 
+                </div>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+        <!-- Product 1: Drink -->
+        <div class="col-6 col-sm-4 mb-4 product-card drink active">
+            <div class="card">
+                <div id="carouselExampleDrink1" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../assets/images/thai.png" alt="Drink 1 Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/images/cocunut.png" alt="Drink 1 Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <!-- Product 2: Veg Curry -->
+        <div class="col-6 col-sm-4 mb-4 product-card curry veg active">
+            <div class="card">
+                <div id="carouselExampleCurryVeg" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../assets/images/eggcurry.png" alt="Veg Curry Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/images/chicken.png" alt="Veg Curry Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                 
+                </div>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+        <!-- Product 1: Drink -->
+        <div class="col-6 col-sm-4 mb-4 product-card drink active">
+            <div class="card">
+                <div id="carouselExampleDrink1" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../assets/images/thai.png" alt="Drink 1 Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/images/cocunut.png" alt="Drink 1 Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <!-- Product 2: Veg Curry -->
+        <div class="col-6 col-sm-4 mb-4 product-card curry veg active">
+            <div class="card">
+                <div id="carouselExampleCurryVeg" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../assets/images/eggcurry.png" alt="Veg Curry Image 1" onclick="openModal(this)">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/images/chicken.png" alt="Veg Curry Image 2" onclick="openModal(this)">
+                        </div>
+                    </div>
+                 
+                </div>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+
 
         <!-- Product 3: Non-Veg Curry -->
         <div class="col-6 col-sm-4 mb-4 product-card curry nonveg active">
@@ -157,17 +516,23 @@
                 <div id="carouselExampleCurryNonVeg" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://via.placeholder.com/300x150?text=Non-Veg+Curry+Image+1" alt="Non-Veg Curry Image 1" onclick="openModal(this)">
+                            <img src="../assets/images/thai.png" alt="Non-Veg Curry Image 1" onclick="openModal(this)">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://via.placeholder.com/300x150?text=Non-Veg+Curry+Image+2" alt="Non-Veg Curry Image 2" onclick="openModal(this)">
+                            <img src="../assets/images/thai.png" alt="Non-Veg Curry Image 2" onclick="openModal(this)">
                         </div>
                     </div>
                  
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Non-Veg Curry</h5>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
                 </div>
+            </div>
+        </div>
             </div>
         </div>
 
@@ -177,17 +542,23 @@
                 <div id="carouselExampleOilyFood" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://via.placeholder.com/300x150?text=Oily+Food+Image+1" alt="Oily Food Image 1" onclick="openModal(this)">
+                            <img src="../assets/images/chicken.png" alt="Oily Food Image 1" onclick="openModal(this)">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://via.placeholder.com/300x150?text=Oily+Food+Image+2" alt="Oily Food Image 2" onclick="openModal(this)">
+                            <img src="../assets/images/thai.png" alt="Oily Food Image 2" onclick="openModal(this)">
                         </div>
                     </div>
                   
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Oily Food</h5>
+                <div class="card-body custom-card-body">
+            <div class="content-wrapper">
+                <div class="food-name">Food Long Name Example</div>
+                <div class="price-checkbox">
+                    <span class="food-price">Rs 50</span>
+                    <input type="checkbox" class="custom-checkbox">
                 </div>
+            </div>
+        </div>
             </div>
         </div>
     </div>
@@ -212,30 +583,6 @@
         </li>
     </ul>
 </nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!-- Image Modal -->
@@ -312,4 +659,3 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
